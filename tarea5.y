@@ -17,6 +17,7 @@ struct auxNode *treeAux;
 struct funNode *funTableRoot;
 int aux=0;
 int flag=0;
+struct funNode * funSearchTmp;
 extern int numlinea;
 %}
 
@@ -170,7 +171,12 @@ factor : OPENPAR expr CLOSEPAR {$$=$2;}
                                 $$=newTreeNode(strdup("id"), $1, aux, 0, 0, NULL, NULL, NULL, NULL);}
        | NUMI                  {$$=newTreeNode(strdup("int"), NULL, 1, $1, 0, NULL, NULL, NULL, NULL);} 
        | NUMF                  {$$=newTreeNode(strdup("float"), NULL, 2, 0, $1, NULL, NULL, NULL, NULL);} 
-       | ID OPENPAR opt_exprs CLOSEPAR {$$=newTreeNode($1, NULL, 2, 0, 0, $3, NULL, NULL, NULL);//se agrega al arbol un nodo qe representa a una funcion
+       | ID OPENPAR opt_exprs CLOSEPAR {funSearchTmp = searchFun(funTableRoot, $1);
+                                        if(funSearchTmp == NULL){
+                                          error(7, $1);
+                                        }else{
+                                          $$=newTreeNode($1, NULL, 2, 0, 0, $3, NULL, NULL, NULL);//se agrega al arbol un nodo qe representa a una funcion
+                                        }
                                        }
 ;
 

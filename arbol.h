@@ -140,6 +140,8 @@ void error(int a, char*ref){
 		break;
 		case 6:
 		printf("%s definida por segunda vez\n", ref);
+		case 7:
+		printf("%s no definida\n", ref);
 		break;
 	}
 	exit(1);

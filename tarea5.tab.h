@@ -99,7 +99,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 24 "tarea5.y"
+#line 25 "tarea5.y"
 
   int entero;
   float real;
