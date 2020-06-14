@@ -29,6 +29,7 @@ DIGITO [0-9]
 "to"	  {return TO; /* Simbolo de to */}
 "step"	  {return STEP; /* Simbolo de step */}
 "do"	  {return DO; /* Simbolo de do */}
+"fun"   {return FUN; /* Simbolo de fun*/}
 
 "("       {return OPENPAR; /* Simbolo de parentesis que abre */}
 ")"       {return CLOSEPAR; /* Simbolo de parentesis que cierra */}
