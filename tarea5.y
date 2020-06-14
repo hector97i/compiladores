@@ -46,7 +46,7 @@ extern int numlinea;
 prog : PROGRAM ID OPENKEY opt_decls opt_fun_decls CLOSEKEY stmt {treeRoot=$7;}
 ;
 
-opt_decls : decls                                 {flag=1};
+opt_decls : decls                                 {flag=1;}
           | %empty                                {}
 ;
 
@@ -170,16 +170,16 @@ factor : OPENPAR expr CLOSEPAR {$$=$2;}
                                 $$=newTreeNode(strdup("id"), $1, aux, 0, 0, NULL, NULL, NULL, NULL);}
        | NUMI                  {$$=newTreeNode(strdup("int"), NULL, 1, $1, 0, NULL, NULL, NULL, NULL);} 
        | NUMF                  {$$=newTreeNode(strdup("float"), NULL, 2, 0, $1, NULL, NULL, NULL, NULL);} 
-       | ID OPENPAR opt_exprs CLOSEPAR {$$=newTreeNode(strdup("fun"), NULL, 2, 0, $1, NULL, NULL, NULL, NULL);//se agrega al arbol un nodo qe representa a una funcion
+       | ID OPENPAR opt_exprs CLOSEPAR {$$=newTreeNode(strdup("fun"), NULL, 2, 0, 0, $1, $3, NULL, NULL);//se agrega al arbol un nodo qe representa a una funcion
                                        }
 ;
 
-opt_exprs : expr_lst
-          | %empty
+opt_exprs : expr_lst  
+          | %empty    
 ;
 
-expr_lst : expr_lst expr
-         | expr
+expr_lst : expr_lst expr    
+         | expr             
 ;
 
 expresion : expr MENORQUE expr    {fun_Valid_Dos($1,$3);

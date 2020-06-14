@@ -1316,7 +1316,7 @@ yyreduce:
 
   case 3:
 #line 49 "tarea5.y"
-                                                  {flag=1}
+                                                  {flag=1;}
 #line 1321 "tarea5.tab.c"
     break;
 
@@ -1577,7 +1577,7 @@ yyreduce:
 
   case 47:
 #line 173 "tarea5.y"
-                                       {(yyval.arbol)=newTreeNode(strdup("fun"), NULL, 2, 0, (yyvsp[-3].palabra), NULL, NULL, NULL, NULL);//se agrega al arbol un nodo qe representa a una funcion
+                                       {(yyval.arbol)=newTreeNode(strdup("fun"), NULL, 2, 0, 0, (yyvsp[-3].palabra), NULL, NULL, NULL);//se agrega al arbol un nodo qe representa a una funcion
                                        }
 #line 1583 "tarea5.tab.c"
     break;
