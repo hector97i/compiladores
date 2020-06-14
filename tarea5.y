@@ -37,7 +37,7 @@ extern int numlinea;
 %token <real> NUMF
 
 %type <entero> tipo
-%type <arbol> expr term factor expresion stmt assign_stmt if_stmt iter_stmt cmp_stmt stmt_lst
+%type <arbol> expr term factor expresion stmt assign_stmt if_stmt iter_stmt cmp_stmt stmt_lst opt_exprs expr_lst
 
 %start prog
 
@@ -170,7 +170,7 @@ factor : OPENPAR expr CLOSEPAR {$$=$2;}
                                 $$=newTreeNode(strdup("id"), $1, aux, 0, 0, NULL, NULL, NULL, NULL);}
        | NUMI                  {$$=newTreeNode(strdup("int"), NULL, 1, $1, 0, NULL, NULL, NULL, NULL);} 
        | NUMF                  {$$=newTreeNode(strdup("float"), NULL, 2, 0, $1, NULL, NULL, NULL, NULL);} 
-       | ID OPENPAR opt_exprs CLOSEPAR {$$=newTreeNode(strdup("fun"), NULL, 2, 0, 0, $1, $3, NULL, NULL);//se agrega al arbol un nodo qe representa a una funcion
+       | ID OPENPAR opt_exprs CLOSEPAR {$$=newTreeNode($1, NULL, 2, 0, 0, $3, NULL, NULL, NULL);//se agrega al arbol un nodo qe representa a una funcion
                                        }
 ;
 
