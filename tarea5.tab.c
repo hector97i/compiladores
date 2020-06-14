@@ -639,8 +639,8 @@ static const yytype_uint8 yyrline[] =
       71,    72,    75,    76,    79,    84,    91,    92,    95,    96,
       99,   104,   106,   108,   110,   114,   117,   119,   121,   125,
      127,   131,   133,   136,   138,   143,   146,   151,   154,   157,
-     160,   163,   166,   169,   170,   172,   173,   174,   183,   184,
-     187,   188,   191,   194,   197,   200,   203
+     160,   163,   166,   169,   170,   172,   173,   174,   188,   189,
+     192,   193,   196,   199,   202,   205,   208
 };
 #endif
 
@@ -1578,58 +1578,63 @@ yyreduce:
 
   case 47:
 #line 174 "tarea5.y"
-                                       {funSearchTmp = searchFun(funTableRoot, (yyvsp[-3].palabra));
-                                        if(funSearchTmp == NULL){
+                                       {funSearchTmp = searchFun(funTableRoot, (yyvsp[-3].palabra)); //Buscar si la funcion ya está en la tabla
+                                        if(funSearchTmp == NULL){   //Si no está, error.
                                           error(7, (yyvsp[-3].palabra));
-                                        }else{
-                                          (yyval.arbol)=newTreeNode((yyvsp[-3].palabra), NULL, 2, 0, 0, (yyvsp[-1].arbol), NULL, NULL, NULL);//se agrega al arbol un nodo qe representa a una funcion
+                                        }else{    //Si está, checar que los tipos de parámetro coincidan.
+                                          if(funcParamCheck(funTableRoot, funSearchTmp) == 0){
+                                            (yyval.arbol)=newTreeNode((yyvsp[-3].palabra), NULL, 2, 0, 0, (yyvsp[-1].arbol), NULL, NULL, NULL);//Si los tipos coinciden, se agrega 
+                                          }else{                                                      //al arbol un nodo de funcion apuntando a sus parametros
+                                            error(8, (yyvsp[-3].palabra));         //Si los tipos entre la llamada y la declaracion no coinciden, error.
+                                          }
+                                            
                                         }
                                        }
-#line 1589 "tarea5.tab.c"
+#line 1594 "tarea5.tab.c"
     break;
 
   case 52:
-#line 191 "tarea5.y"
+#line 196 "tarea5.y"
                                   {fun_Valid_Dos((yyvsp[-2].arbol),(yyvsp[0].arbol));
                                    (yyval.arbol)=newTreeNode((yyvsp[-1].palabra), NULL, 0, 0, 0, (yyvsp[-2].arbol), (yyvsp[0].arbol), NULL, NULL);
                                   }
-#line 1597 "tarea5.tab.c"
+#line 1602 "tarea5.tab.c"
     break;
 
   case 53:
-#line 194 "tarea5.y"
+#line 199 "tarea5.y"
                                   {fun_Valid_Dos((yyvsp[-2].arbol),(yyvsp[0].arbol));
                                    (yyval.arbol)=newTreeNode((yyvsp[-1].palabra), NULL, 0, 0, 0, (yyvsp[-2].arbol), (yyvsp[0].arbol), NULL, NULL);
                                   }
-#line 1605 "tarea5.tab.c"
+#line 1610 "tarea5.tab.c"
     break;
 
   case 54:
-#line 197 "tarea5.y"
+#line 202 "tarea5.y"
                                   {fun_Valid_Dos((yyvsp[-2].arbol),(yyvsp[0].arbol));
                                    (yyval.arbol)=newTreeNode((yyvsp[-1].palabra), NULL, 0, 0, 0, (yyvsp[-2].arbol), (yyvsp[0].arbol), NULL, NULL);
                                   }
-#line 1613 "tarea5.tab.c"
+#line 1618 "tarea5.tab.c"
     break;
 
   case 55:
-#line 200 "tarea5.y"
+#line 205 "tarea5.y"
                                   {fun_Valid_Dos((yyvsp[-2].arbol),(yyvsp[0].arbol));
                                    (yyval.arbol)=newTreeNode((yyvsp[-1].palabra), NULL, 0, 0, 0, (yyvsp[-2].arbol), (yyvsp[0].arbol), NULL, NULL);
                                   }
-#line 1621 "tarea5.tab.c"
+#line 1626 "tarea5.tab.c"
     break;
 
   case 56:
-#line 203 "tarea5.y"
+#line 208 "tarea5.y"
                                   {fun_Valid_Dos((yyvsp[-2].arbol),(yyvsp[0].arbol));
                                    (yyval.arbol)=newTreeNode((yyvsp[-1].palabra), NULL, 0, 0, 0, (yyvsp[-2].arbol), (yyvsp[0].arbol), NULL, NULL);
                                   }
-#line 1629 "tarea5.tab.c"
+#line 1634 "tarea5.tab.c"
     break;
 
 
-#line 1633 "tarea5.tab.c"
+#line 1638 "tarea5.tab.c"
 
       default: break;
     }
@@ -1823,7 +1828,7 @@ yyreturn:
   return yyresult;
 }
 
-#line 208 "tarea5.y"
+#line 213 "tarea5.y"
 
 
 int yyerror(char const * s) {

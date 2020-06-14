@@ -171,11 +171,16 @@ factor : OPENPAR expr CLOSEPAR {$$=$2;}
                                 $$=newTreeNode(strdup("id"), $1, aux, 0, 0, NULL, NULL, NULL, NULL);}
        | NUMI                  {$$=newTreeNode(strdup("int"), NULL, 1, $1, 0, NULL, NULL, NULL, NULL);} 
        | NUMF                  {$$=newTreeNode(strdup("float"), NULL, 2, 0, $1, NULL, NULL, NULL, NULL);} 
-       | ID OPENPAR opt_exprs CLOSEPAR {funSearchTmp = searchFun(funTableRoot, $1);
-                                        if(funSearchTmp == NULL){
+       | ID OPENPAR opt_exprs CLOSEPAR {funSearchTmp = searchFun(funTableRoot, $1); //Buscar si la funcion ya está en la tabla
+                                        if(funSearchTmp == NULL){   //Si no está, error.
                                           error(7, $1);
-                                        }else{
-                                          $$=newTreeNode($1, NULL, 2, 0, 0, $3, NULL, NULL, NULL);//se agrega al arbol un nodo qe representa a una funcion
+                                        }else{    //Si está, checar que los tipos de parámetro coincidan.
+                                          if(funcParamCheck(funTableRoot, funSearchTmp) == 0){
+                                            $$=newTreeNode($1, NULL, 2, 0, 0, $3, NULL, NULL, NULL);//Si los tipos coinciden, se agrega 
+                                          }else{                                                      //al arbol un nodo de funcion apuntando a sus parametros
+                                            error(8, $1);         //Si los tipos entre la llamada y la declaracion no coinciden, error.
+                                          }
+                                            
                                         }
                                        }
 ;

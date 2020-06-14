@@ -29,7 +29,6 @@ struct funNode{
 	int tipo;
 	int natVal;
 	float realVal;
-	char * name;
 
 };
 
@@ -141,7 +140,9 @@ void error(int a, char*ref){
 		case 6:
 		printf("%s definida por segunda vez\n", ref);
 		case 7:
-		printf("%s no definida\n", ref);
+		printf("Función '%s'()  no declarada\n", ref);
+		case 8:
+		printf("Los parámetros de '%s'() no coinciden con la declaración\n", ref);
 		break;
 	}
 	exit(1);
@@ -592,7 +593,35 @@ int insertInFunTable(struct funNode **head, char* ref, struct node *var, struct 
 
 void printFun(struct funNode *head){//Simple print method for the list
 	while(head){
-		printf("%s",head->name);
+		printf("%s",head->id);
 	}
 	head=head->next;
+}
+
+
+int funcParamCheck(struct funNode * root, struct funNode * call){
+
+	struct node * tmp = root->paramTree;
+	struct node * tmp2 = call->paramTree;
+
+	while(tmp != NULL){
+		
+		if(strcmp(tmp->name, tmp2->name)){
+
+			if(tmp->tipo == tmp2->tipo){
+
+				tmp = tmp->next;
+				tmp2 = tmp2->next;
+
+			}else{
+				return 1;
+			}
+		}else{
+
+			return 1;
+		}
+	}	
+
+	return 0;
+
 }
