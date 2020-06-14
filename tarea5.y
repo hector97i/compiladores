@@ -1,11 +1,7 @@
-/* Este archivo contiene un reconocedor de expresiones aritméticas junto
-   con algunas reglas semánticas que calculan los valores de las
-   expresiones que se reconocen. Las expresiones son muy sencillas y
-   consisten únicamente de sumas, restas, multiplicaciones y divisiones de
-   números enteros. 
+//Autores: Carlos Ignacio Villalobos Sánchez A01731558
+//
+//
 
-   Autor: Alberto Oliart Ros */
-  
 %{
 #include <stdlib.h>
 #include <string.h>
@@ -14,15 +10,15 @@ extern int yylex();
 int yyerror(char const * s);
 #include "arbol.h"
 struct node *tableRoot;
+struct node *localRoot;
+struct node *paramRoot;
 struct treeNode *treeRoot;
 struct auxNode *treeAux;
+struct funNode *funTableRoot;
 int aux=0;
+int flag=0;
 extern int numlinea;
 %}
-
-/* Los elementos terminales de la gramática. La declaración de abajo se
-   convierte en definición de constantes en el archivo calculadora.tab.h
-   que hay que incluir en el archivo de flex. */
 
 %union
 {
@@ -33,7 +29,7 @@ extern int numlinea;
   struct treeNode* arbol;
 }
 
-%token PROGRAM OPENKEY CLOSEKEY PUNTOCOMA VAR DOSPUNTOS OPENPAR CLOSEPAR TO STEP DO
+%token PROGRAM FUN COMA OPENKEY CLOSEKEY PUNTOCOMA VAR DOSPUNTOS OPENPAR CLOSEPAR TO STEP DO
 %token <palabra> SET READ PRINT IF IFELSE WHILE FOR SUMA RESTA DIV MULTI MODULO EXPONEN MENORQUE MAYORQUE IGUAL MAYORIGUAL MENORIGUAL ID
 %token <entero> INT 
 %token <entero> FLOAT
@@ -47,10 +43,10 @@ extern int numlinea;
 
 %%
 
-prog : PROGRAM ID OPENKEY opt_decls CLOSEKEY stmt {treeRoot=$6;}
+prog : PROGRAM ID OPENKEY opt_decls opt_fun_decls CLOSEKEY stmt {treeRoot=$7;}
 ;
 
-opt_decls : decls                                 {}
+opt_decls : decls                                 {flag=1}
           | %empty                                {}
 ;
 
@@ -58,13 +54,50 @@ decls : dec PUNTOCOMA opt_decls                   {}
       | dec                                       {}
 ;
 
-dec   : VAR ID DOSPUNTOS tipo                     {if(!insertInTable(&tableRoot,$2,$4,0,0))
-                                                    error(5,$2);
+dec   : VAR ID DOSPUNTOS tipo                     { if(!flag){
+                                                     if(!insertInTable(&tableRoot,$2,$4,0,0))
+                                                      error(5,$2);
+                                                    }
+                                                    if(!insertInTable(&localRoot,$2,$4,0,0))
+                                                      error(5,$2);
                                                   }
 ;
 
 tipo  : INT {$$=$1;}
       | FLOAT {$$=$1;}
+;
+
+opt_fun_decls : fun_decls                        
+              | %empty
+;
+
+fun_decls : fun_decls fun_dec
+          | fun_dec
+;
+
+fun_dec : FUN ID OPENPAR oparams CLOSEPAR DOSPUNTOS tipo OPENKEY opt_decls CLOSEKEY stmt {if(!insertInFunTable(&funTableRoot,$2,localRoot,paramRoot,$11,$7))
+                                                                                            error(6,$2);
+                                                                                          localRoot=NULL;
+                                                                                          paramRoot=NULL;
+                                                                                         }
+        | FUN ID OPENPAR oparams CLOSEPAR DOSPUNTOS tipo PUNTOCOMA                       {if(!insertInFunTable(&funTableRoot,$2,NULL,paramRoot,NULL,$7))
+                                                                                            error(6,$2);
+                                                                                          localRoot=NULL;
+                                                                                          paramRoot=NULL;
+                                                                                         }
+;
+
+oparams : params              
+        | %empty
+;
+
+params : param COMA params 
+       | param              
+;
+
+param : VAR ID DOSPUNTOS tipo {if(!insertInTable(&paramRoot,$2,$4,0,0))
+                                error(5,$2);
+                              }
 ;
 
 stmt  : assign_stmt {$$=$1;
@@ -83,6 +116,8 @@ assign_stmt : SET ID expr PUNTOCOMA {fun_Valid_SET($2,$3,tableRoot);
             | READ ID PUNTOCOMA     {$$=newTreeNode($1, $2, 0, 0, 0, NULL, NULL, NULL, NULL);
                                     }
             | PRINT expr PUNTOCOMA  {$$=newTreeNode($1, NULL, 0, 0, 0, $2, NULL, NULL, NULL);
+                                    }
+            | RETURN expr PUNTOCOMA  {//ver que onda
                                     }
 ;
 
@@ -135,6 +170,16 @@ factor : OPENPAR expr CLOSEPAR {$$=$2;}
                                 $$=newTreeNode(strdup("id"), $1, aux, 0, 0, NULL, NULL, NULL, NULL);}
        | NUMI                  {$$=newTreeNode(strdup("int"), NULL, 1, $1, 0, NULL, NULL, NULL, NULL);} 
        | NUMF                  {$$=newTreeNode(strdup("float"), NULL, 2, 0, $1, NULL, NULL, NULL, NULL);} 
+       | ID OPENPAR opt_exprs CLOSEPAR {$$=newTreeNode(strdup("fun"), NULL, 2, 0, $1, NULL, NULL, NULL, NULL);//se agrega al arbol un nodo qe representa a una funcion
+                                       }
+;
+
+opt_exprs : expr_lst
+          | %empty
+;
+
+expr_lst : expr_lst, expr
+         | expr
 ;
 
 expresion : expr MENORQUE expr    {fun_Valid_Dos($1,$3);
@@ -164,7 +209,6 @@ void main(int argc, char * argv[]){
   extern FILE * yyin;
   yyin = fopen (argv[1], "r");
   yyparse();
-  printTree(treeRoot);
-  runTree(treeRoot, tableRoot);
+  //runTree(treeRoot, tableRoot);
 }
 
