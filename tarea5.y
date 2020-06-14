@@ -29,7 +29,7 @@ extern int numlinea;
   struct treeNode* arbol;
 }
 
-%token PROGRAM FUN COMA OPENKEY CLOSEKEY PUNTOCOMA VAR DOSPUNTOS OPENPAR CLOSEPAR TO STEP DO
+%token PROGRAM FUN COMA OPENKEY CLOSEKEY PUNTOCOMA VAR DOSPUNTOS OPENPAR CLOSEPAR TO STEP DO RETURN
 %token <palabra> SET READ PRINT IF IFELSE WHILE FOR SUMA RESTA DIV MULTI MODULO EXPONEN MENORQUE MAYORQUE IGUAL MAYORIGUAL MENORIGUAL ID
 %token <entero> INT 
 %token <entero> FLOAT
@@ -46,7 +46,7 @@ extern int numlinea;
 prog : PROGRAM ID OPENKEY opt_decls opt_fun_decls CLOSEKEY stmt {treeRoot=$7;}
 ;
 
-opt_decls : decls                                 {flag=1}
+opt_decls : decls                                 {flag=1};
           | %empty                                {}
 ;
 
@@ -178,7 +178,7 @@ opt_exprs : expr_lst
           | %empty
 ;
 
-expr_lst : expr_lst, expr
+expr_lst : expr_lst expr
          | expr
 ;
 

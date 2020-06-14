@@ -15,6 +15,8 @@ DIGITO [0-9]
 
 "program" {return PROGRAM; /* Simbolo de program */}
 ";"	  	  {return PUNTOCOMA; /* Simbolo de punto y coma */}
+"fun" 	  {return FUN; /* Simbolo de funcion */}
+","	  	  {return COMA; /* Simbolo de coma */}
 "var"	  {return VAR; /* Simbolo de variable */}
 ":"		  {return DOSPUNTOS; /* Simbolo de dos puntos */}
 "int"	  {yylval.entero=1; return INT; /* Simbolo de int */}
@@ -29,6 +31,7 @@ DIGITO [0-9]
 "to"	  {return TO; /* Simbolo de to */}
 "step"	  {return STEP; /* Simbolo de step */}
 "do"	  {return DO; /* Simbolo de do */}
+"return" {return RETURN; /*Simbolo de return*/}
 
 "("       {return OPENPAR; /* Simbolo de parentesis que abre */}
 ")"       {return CLOSEPAR; /* Simbolo de parentesis que cierra */}

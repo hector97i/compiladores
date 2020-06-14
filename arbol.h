@@ -29,6 +29,7 @@ struct funNode{
 	int tipo;
 	int natVal;
 	float realVal;
+	char * name;
 
 };
 
@@ -575,7 +576,7 @@ int insertInFunTable(struct funNode **head, char* ref, struct node *var, struct 
 		return 1;
 	}
 	else{
-		if(busqueda->treeNode==NULL){
+		if(busqueda->decTree == NULL){
 			//función de error(6,$2); aquí se comparan los paramRoot
 			busqueda->decTree=dec;
 			busqueda->varTree=var;
