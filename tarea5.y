@@ -71,9 +71,34 @@ dec   : VAR ID DOSPUNTOS tipo                     {if(!insertInTable(&tableRoot,
                                                  
 
 tipo  : INT {$$=$1;}
-      | FLOAT {$$=$1;}
-;
-
+      | FLOAT {$$=$1;};
+      
+opt_fun_decls: fun_decls
+               |%empty;
+               
+fun_decls:  fun_decls fun_dec
+            |fun_dec;
+            
+fun_dec: FUN ID OPENPAR operams CLOSEPAR DOSPUNTOS tipo OPENKEY opt_decls CLOSEKEY stmt
+         {if(!insertInFunTable(&funTableRoot,$2,localRoot,paramRoot,$11,$7))
+         }
+         
+         |FUN ID OPENPAR params CLOSEPAR DOSPUNTOS tipo PUNTOCOMA
+         {if(!insertInFunTable(&funTableRoot,$2,NULL,paramRoot,NULL,$7))
+         };
+         
+oparams : params
+        | empty%;
+        
+params  :param COMA params
+        |param;
+        
+param   :VAR ID DOSPUNTOS tipo {if(!insertInTable(&paramRoot, $2,$4,0,0))
+                                  error(5,$2);
+                                 };
+                                 
+               
+         
 stmt  : assign_stmt {$$=$1;
                     }
       | if_stmt     {$$=$1;
