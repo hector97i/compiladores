@@ -1,0 +1,12 @@
+program test2{
+
+    var m1: int;
+    var m2: int;
+    var res: int
+}
+{
+    set m1 2;
+    set m2 2;
+    set res m1 + m2;
+    print res;
+}

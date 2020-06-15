@@ -51,7 +51,7 @@ opt_decls : decls                                 {flag=1;}
           | %empty                                {}
 ;
 
-decls : dec PUNTOCOMA opt_decls                   {}
+decls : dec PUNTOCOMA decls                   {}
       | dec                                       {}
 ;
 
