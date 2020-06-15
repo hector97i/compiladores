@@ -14,9 +14,13 @@ extern int yylex();
 int yyerror(char const * s);
 #include "arbol.h"
 struct node *tableRoot;
+struct node *localRoot;
+struct node *paramRoot;
 struct treeNode *treeRoot;
 struct auxNode *treeAux;
+struct funNode *funTableRoot
 int aux=0;
+int flag=0;
 extern int numlinea;
 %}
 
@@ -33,7 +37,7 @@ extern int numlinea;
   struct treeNode* arbol;
 }
 
-%token PROGRAM OPENKEY CLOSEKEY PUNTOCOMA VAR DOSPUNTOS OPENPAR CLOSEPAR TO STEP DO FUN
+%token PROGRAM OPENKEY CLOSEKEY PUNTOCOMA VAR DOSPUNTOS OPENPAR CLOSEPAR TO STEP DO FUN COMA
 %token <palabra> SET READ PRINT IF IFELSE WHILE FOR SUMA RESTA DIV MULTI MODULO EXPONEN MENORQUE MAYORQUE IGUAL MAYORIGUAL MENORIGUAL ID
 %token <entero> INT 
 %token <entero> FLOAT
@@ -50,7 +54,7 @@ extern int numlinea;
 prog : PROGRAM ID OPENKEY opt_decls CLOSEKEY stmt {treeRoot=$6;}
 ;
 
-opt_decls : decls                                 {}
+opt_decls : decls                                 {flag=1}
           | %empty                                {}
 ;
 
@@ -60,8 +64,11 @@ decls : dec PUNTOCOMA opt_decls                   {}
 
 dec   : VAR ID DOSPUNTOS tipo                     {if(!insertInTable(&tableRoot,$2,$4,0,0))
                                                     error(5,$2);
+                                                  };
+                                                  {if(!insertInTable(localRoot,$2,$4,0,0))
+                                                    error(5,$2);
                                                   }
-;
+                                                 
 
 tipo  : INT {$$=$1;}
       | FLOAT {$$=$1;}
