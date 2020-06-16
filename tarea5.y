@@ -169,7 +169,15 @@ factor : OPENPAR expr CLOSEPAR {$$=$2;}
                                 $$=newTreeNode(strdup("id"), $1, aux, 0, 0, NULL, NULL, NULL, NULL);}
        | NUMI                  {$$=newTreeNode(strdup("int"), NULL, 1, $1, 0, NULL, NULL, NULL, NULL);} 
        | NUMF                  {$$=newTreeNode(strdup("float"), NULL, 2, 0, $1, NULL, NULL, NULL, NULL);} 
+       | ID OPENPAR opt_exprs CLOSEPAR {$$=newTreeNode($1, NULL, $2,0, $1, NULL, NULL, NULL, NULL);}
 ;
+
+opt_exprs :expr_list
+          | empty%;
+          
+expr_list : expr_list
+          | expr;
+          
 
 expresion : expr MENORQUE expr    {fun_Valid_Dos($1,$3);
                                    $$=newTreeNode($2, NULL, 0, 0, 0, $1, $3, NULL, NULL);
@@ -192,6 +200,7 @@ expresion : expr MENORQUE expr    {fun_Valid_Dos($1,$3);
 
 int yyerror(char const * s) {
   fprintf(stderr, "%s en linea %d\n", s, numlinea);
+  return..
 }
 
 void main(int argc, char * argv[]){
