@@ -30,8 +30,8 @@ extern int numlinea;
   struct treeNode* arbol;
 }
 
-%token PROGRAM FUN COMA OPENKEY CLOSEKEY PUNTOCOMA VAR DOSPUNTOS OPENPAR CLOSEPAR TO STEP DO RETURN
-%token <palabra> SET READ PRINT IF IFELSE WHILE FOR SUMA RESTA DIV MULTI MODULO EXPONEN MENORQUE MAYORQUE IGUAL MAYORIGUAL MENORIGUAL ID
+%token PROGRAM FUN COMA OPENKEY CLOSEKEY PUNTOCOMA VAR DOSPUNTOS OPENPAR CLOSEPAR TO STEP DO
+%token <palabra> SET READ PRINT IF IFELSE WHILE FOR SUMA RESTA DIV MULTI MODULO EXPONEN MENORQUE MAYORQUE IGUAL MAYORIGUAL MENORIGUAL ID RETURN
 %token <entero> INT 
 %token <entero> FLOAT
 %token <entero> NUMI
@@ -51,16 +51,17 @@ opt_decls : decls                                 {flag=1;}
           | %empty                                {}
 ;
 
-decls : dec PUNTOCOMA decls                   {}
+decls : dec PUNTOCOMA decls                       {}
       | dec                                       {}
 ;
 
 dec   : VAR ID DOSPUNTOS tipo                     { if(!flag){
                                                      if(!insertInTable(&tableRoot,$2,$4,0,0))
-                                                      error(5,$2);
+                                                        error(5,$2);
+                                                    }else{
+                                                      if(!insertInTable(&localRoot,$2,$4,0,0))
+                                                        error(5,$2);
                                                     }
-                                                    if(!insertInTable(&localRoot,$2,$4,0,0))
-                                                      error(5,$2);
                                                   }
 ;
 
@@ -111,14 +112,17 @@ stmt  : assign_stmt {$$=$1;
                     }
 ;
 
-assign_stmt : SET ID expr PUNTOCOMA {fun_Valid_SET($2,$3,tableRoot);
+assign_stmt : SET ID expr PUNTOCOMA {
+                                     fun_Valid_SET($2,$3,tableRoot);
                                      $$=newTreeNode($1, $2, 0, 0, 0, $3, NULL, NULL, NULL);
                                     }
             | READ ID PUNTOCOMA     {$$=newTreeNode($1, $2, 0, 0, 0, NULL, NULL, NULL, NULL);
                                     }
-            | PRINT expr PUNTOCOMA  {$$=newTreeNode($1, NULL, 0, 0, 0, $2, NULL, NULL, NULL);
+            | PRINT expr PUNTOCOMA  {
+                                     $$=newTreeNode($1, NULL, 0, 0, 0, $2, NULL, NULL, NULL);
                                     }
-            | RETURN expr PUNTOCOMA  {//ver que onda
+            | RETURN expr PUNTOCOMA {
+                                      $$=newTreeNode($1, NULL, 0, 0, 0, $2, NULL, NULL, NULL);
                                     }
 ;
 
@@ -167,30 +171,30 @@ term : term MULTI factor {aux=fun_Valid_Dos($1,$3);
 ;
 
 factor : OPENPAR expr CLOSEPAR {$$=$2;}
-       | ID                    {aux=fun_ID($1,tableRoot);
+       | ID                    {aux=fun_ID($1,tableRoot,paramRoot,localRoot);
                                 $$=newTreeNode(strdup("id"), $1, aux, 0, 0, NULL, NULL, NULL, NULL);}
        | NUMI                  {$$=newTreeNode(strdup("int"), NULL, 1, $1, 0, NULL, NULL, NULL, NULL);} 
        | NUMF                  {$$=newTreeNode(strdup("float"), NULL, 2, 0, $1, NULL, NULL, NULL, NULL);} 
        | ID OPENPAR opt_exprs CLOSEPAR {funSearchTmp = searchFun(funTableRoot, $1); //Buscar si la funcion ya está en la tabla
+                                        struct treeNode* tmp;
                                         if(funSearchTmp == NULL){   //Si no está, error.
                                           error(7, $1);
                                         }else{    //Si está, checar que los tipos de parámetro coincidan.
-                                          $$=newTreeNode($1, NULL, 2, 0, 0, $3, NULL, NULL, NULL);//Si los tipos coinciden, se agrega 
-                                          if(funcParamCheck(funTableRoot, funSearchTmp) == 0){
-                                          }else{                                                      //al arbol un nodo de funcion apuntando a sus parametros
+                                          tmp=newTreeNode(strdup("fun"), $1, funSearchTmp->tipo, 0, 0, $3, funSearchTmp->decTree, NULL, NULL);//Si los tipos coinciden, se agrega 
+                                          if(funcParamCheck(tmp, funSearchTmp) != 0){
                                             error(8, $1);         //Si los tipos entre la llamada y la declaracion no coinciden, error.
-                                          }
-                                            
+                                          }else
+                                            $$=tmp;                                            
                                         }
                                        }
 ;
 
-opt_exprs : expr_lst  
+opt_exprs : expr_lst           {$$=$1;}
           | %empty    
 ;
 
-expr_lst : expr_lst expr    
-         | expr             
+expr_lst : expr_lst COMA expr  {$1->next=$3;}  
+         | expr                {$$=$1;}
 ;
 
 expresion : expr MENORQUE expr    {fun_Valid_Dos($1,$3);
@@ -221,6 +225,6 @@ int main(int argc, char * argv[]){
   extern FILE * yyin;
   yyin = fopen (argv[1], "r");
   yyparse();
-  runTree(treeRoot, tableRoot);
+  runTree(treeRoot, tableRoot, funTableRoot);
 }
 

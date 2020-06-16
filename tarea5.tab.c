@@ -143,26 +143,26 @@ extern int yydebug;
     TO = 268,                      /* TO  */
     STEP = 269,                    /* STEP  */
     DO = 270,                      /* DO  */
-    RETURN = 271,                  /* RETURN  */
-    SET = 272,                     /* SET  */
-    READ = 273,                    /* READ  */
-    PRINT = 274,                   /* PRINT  */
-    IF = 275,                      /* IF  */
-    IFELSE = 276,                  /* IFELSE  */
-    WHILE = 277,                   /* WHILE  */
-    FOR = 278,                     /* FOR  */
-    SUMA = 279,                    /* SUMA  */
-    RESTA = 280,                   /* RESTA  */
-    DIV = 281,                     /* DIV  */
-    MULTI = 282,                   /* MULTI  */
-    MODULO = 283,                  /* MODULO  */
-    EXPONEN = 284,                 /* EXPONEN  */
-    MENORQUE = 285,                /* MENORQUE  */
-    MAYORQUE = 286,                /* MAYORQUE  */
-    IGUAL = 287,                   /* IGUAL  */
-    MAYORIGUAL = 288,              /* MAYORIGUAL  */
-    MENORIGUAL = 289,              /* MENORIGUAL  */
-    ID = 290,                      /* ID  */
+    SET = 271,                     /* SET  */
+    READ = 272,                    /* READ  */
+    PRINT = 273,                   /* PRINT  */
+    IF = 274,                      /* IF  */
+    IFELSE = 275,                  /* IFELSE  */
+    WHILE = 276,                   /* WHILE  */
+    FOR = 277,                     /* FOR  */
+    SUMA = 278,                    /* SUMA  */
+    RESTA = 279,                   /* RESTA  */
+    DIV = 280,                     /* DIV  */
+    MULTI = 281,                   /* MULTI  */
+    MODULO = 282,                  /* MODULO  */
+    EXPONEN = 283,                 /* EXPONEN  */
+    MENORQUE = 284,                /* MENORQUE  */
+    MAYORQUE = 285,                /* MAYORQUE  */
+    IGUAL = 286,                   /* IGUAL  */
+    MAYORIGUAL = 287,              /* MAYORIGUAL  */
+    MENORIGUAL = 288,              /* MENORIGUAL  */
+    ID = 289,                      /* ID  */
+    RETURN = 290,                  /* RETURN  */
     INT = 291,                     /* INT  */
     FLOAT = 292,                   /* FLOAT  */
     NUMI = 293,                    /* NUMI  */
@@ -217,26 +217,26 @@ enum yysymbol_kind_t
   YYSYMBOL_TO = 13,                        /* TO  */
   YYSYMBOL_STEP = 14,                      /* STEP  */
   YYSYMBOL_DO = 15,                        /* DO  */
-  YYSYMBOL_RETURN = 16,                    /* RETURN  */
-  YYSYMBOL_SET = 17,                       /* SET  */
-  YYSYMBOL_READ = 18,                      /* READ  */
-  YYSYMBOL_PRINT = 19,                     /* PRINT  */
-  YYSYMBOL_IF = 20,                        /* IF  */
-  YYSYMBOL_IFELSE = 21,                    /* IFELSE  */
-  YYSYMBOL_WHILE = 22,                     /* WHILE  */
-  YYSYMBOL_FOR = 23,                       /* FOR  */
-  YYSYMBOL_SUMA = 24,                      /* SUMA  */
-  YYSYMBOL_RESTA = 25,                     /* RESTA  */
-  YYSYMBOL_DIV = 26,                       /* DIV  */
-  YYSYMBOL_MULTI = 27,                     /* MULTI  */
-  YYSYMBOL_MODULO = 28,                    /* MODULO  */
-  YYSYMBOL_EXPONEN = 29,                   /* EXPONEN  */
-  YYSYMBOL_MENORQUE = 30,                  /* MENORQUE  */
-  YYSYMBOL_MAYORQUE = 31,                  /* MAYORQUE  */
-  YYSYMBOL_IGUAL = 32,                     /* IGUAL  */
-  YYSYMBOL_MAYORIGUAL = 33,                /* MAYORIGUAL  */
-  YYSYMBOL_MENORIGUAL = 34,                /* MENORIGUAL  */
-  YYSYMBOL_ID = 35,                        /* ID  */
+  YYSYMBOL_SET = 16,                       /* SET  */
+  YYSYMBOL_READ = 17,                      /* READ  */
+  YYSYMBOL_PRINT = 18,                     /* PRINT  */
+  YYSYMBOL_IF = 19,                        /* IF  */
+  YYSYMBOL_IFELSE = 20,                    /* IFELSE  */
+  YYSYMBOL_WHILE = 21,                     /* WHILE  */
+  YYSYMBOL_FOR = 22,                       /* FOR  */
+  YYSYMBOL_SUMA = 23,                      /* SUMA  */
+  YYSYMBOL_RESTA = 24,                     /* RESTA  */
+  YYSYMBOL_DIV = 25,                       /* DIV  */
+  YYSYMBOL_MULTI = 26,                     /* MULTI  */
+  YYSYMBOL_MODULO = 27,                    /* MODULO  */
+  YYSYMBOL_EXPONEN = 28,                   /* EXPONEN  */
+  YYSYMBOL_MENORQUE = 29,                  /* MENORQUE  */
+  YYSYMBOL_MAYORQUE = 30,                  /* MAYORQUE  */
+  YYSYMBOL_IGUAL = 31,                     /* IGUAL  */
+  YYSYMBOL_MAYORIGUAL = 32,                /* MAYORIGUAL  */
+  YYSYMBOL_MENORIGUAL = 33,                /* MENORIGUAL  */
+  YYSYMBOL_ID = 34,                        /* ID  */
+  YYSYMBOL_RETURN = 35,                    /* RETURN  */
   YYSYMBOL_INT = 36,                       /* INT  */
   YYSYMBOL_FLOAT = 37,                     /* FLOAT  */
   YYSYMBOL_NUMI = 38,                      /* NUMI  */
@@ -583,7 +583,7 @@ union yyalloc
 /* YYNRULES -- Number of rules.  */
 #define YYNRULES  56
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  125
+#define YYNSTATES  126
 
 #define YYMAXUTOK   294
 
@@ -635,12 +635,12 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    47,    47,    50,    51,    54,    55,    58,    67,    68,
-      71,    72,    75,    76,    79,    84,    91,    92,    95,    96,
-      99,   104,   106,   108,   110,   114,   117,   119,   121,   125,
-     127,   131,   133,   136,   138,   143,   146,   151,   154,   157,
-     160,   163,   166,   169,   170,   172,   173,   174,   188,   189,
-     192,   193,   196,   199,   202,   205,   208
+       0,    47,    47,    50,    51,    54,    55,    58,    68,    69,
+      72,    73,    76,    77,    80,    85,    92,    93,    96,    97,
+     100,   105,   107,   109,   111,   115,   119,   121,   124,   129,
+     131,   135,   137,   140,   142,   147,   150,   155,   158,   161,
+     164,   167,   170,   173,   174,   176,   177,   178,   192,   193,
+     196,   197,   200,   203,   206,   209,   212
 };
 #endif
 
@@ -658,10 +658,10 @@ static const char *const yytname[] =
 {
   "\"end of file\"", "error", "\"invalid token\"", "PROGRAM", "FUN",
   "COMA", "OPENKEY", "CLOSEKEY", "PUNTOCOMA", "VAR", "DOSPUNTOS",
-  "OPENPAR", "CLOSEPAR", "TO", "STEP", "DO", "RETURN", "SET", "READ",
-  "PRINT", "IF", "IFELSE", "WHILE", "FOR", "SUMA", "RESTA", "DIV", "MULTI",
-  "MODULO", "EXPONEN", "MENORQUE", "MAYORQUE", "IGUAL", "MAYORIGUAL",
-  "MENORIGUAL", "ID", "INT", "FLOAT", "NUMI", "NUMF", "$accept", "prog",
+  "OPENPAR", "CLOSEPAR", "TO", "STEP", "DO", "SET", "READ", "PRINT", "IF",
+  "IFELSE", "WHILE", "FOR", "SUMA", "RESTA", "DIV", "MULTI", "MODULO",
+  "EXPONEN", "MENORQUE", "MAYORQUE", "IGUAL", "MAYORIGUAL", "MENORIGUAL",
+  "ID", "RETURN", "INT", "FLOAT", "NUMI", "NUMF", "$accept", "prog",
   "opt_decls", "decls", "dec", "tipo", "opt_fun_decls", "fun_decls",
   "fun_dec", "oparams", "params", "param", "stmt", "assign_stmt",
   "if_stmt", "iter_stmt", "cmp_stmt", "stmt_lst", "expr", "term", "factor",
@@ -687,7 +687,7 @@ static const yytype_int16 yytoknum[] =
 };
 #endif
 
-#define YYPACT_NINF (-27)
+#define YYPACT_NINF (-36)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -701,19 +701,19 @@ static const yytype_int16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-       5,   -19,    28,     7,   -27,    24,   -16,    35,   -27,    36,
-      55,    33,    63,    35,   -27,    24,   -26,    60,    95,   -27,
-     -27,   -27,   -27,   -27,    71,    34,    -8,    48,    49,    -8,
-      74,    81,    86,    82,   -27,   -27,   -27,   -27,   -27,    65,
-     107,   -27,   115,   -27,   -27,    87,    -8,   110,   -27,   -27,
-      -7,    19,   -27,    -8,   114,    -3,    -8,    -8,    -8,    88,
-     116,   117,    71,   -27,   -27,   -10,    -8,   -27,    -8,    -8,
-      -8,    -8,    -1,   -27,   -27,    57,   112,   113,   118,    -8,
-     -26,   -26,   -27,   -27,    23,   119,    -8,    19,    19,   -27,
-     -27,   -27,    -8,    -8,    -8,    -8,    -8,    95,    95,    95,
-      13,   -27,    -2,   -27,    23,    23,    23,    23,    23,    23,
-     -27,    95,   -27,    -8,    24,   -27,   -27,    18,   121,    -8,
-      95,    10,   -27,    95,   -27
+       2,   -26,    11,    25,   -36,    27,     5,    49,   -36,    35,
+      31,    23,    68,    49,   -36,    27,   -35,    76,    48,   -36,
+     -36,   -36,   -36,   -36,    80,     7,    71,    81,    -1,    84,
+      99,   105,   101,    -1,   -36,   -36,   -36,   -36,   -36,    85,
+     106,   -36,   115,   -36,   -36,    28,    -1,   113,    -1,   111,
+     -36,   -36,    -5,    33,   -36,    -1,    -1,    -1,    89,    -2,
+     114,   116,    80,   -36,   -36,    32,   -36,    -8,    -1,   -36,
+      -1,    -1,    -1,    -1,    61,   117,   118,   119,    -1,   -36,
+     -35,   -35,   -36,   -36,   -36,    77,   120,   122,    33,    33,
+     -36,   -36,    -1,    -1,    -1,    -1,    -1,    48,    48,    48,
+      58,   -36,     1,   -36,    -1,    77,    77,    77,    77,    77,
+     -36,    48,   -36,    -1,    27,   -36,    77,   -36,    37,   121,
+      -1,    48,    83,   -36,    48,   -36
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -725,31 +725,31 @@ static const yytype_int8 yydefact[] =
        0,     0,     0,    10,    13,     0,     0,     0,     0,    12,
        5,     8,     9,     7,    17,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     2,    21,    22,    23,    24,     0,
-       0,    16,    19,    33,    35,     0,     0,    44,    45,    46,
-       0,    39,    42,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,    34,    36,     0,    49,    28,     0,     0,
-       0,     0,     0,    26,    27,     0,     0,     0,     0,     0,
-       0,     0,    18,    43,    51,     0,    48,    37,    38,    41,
-      40,    25,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,    20,     0,    47,    50,    52,    53,    54,    56,    55,
-      29,     0,    31,     0,     4,    15,    30,     0,     0,     0,
-       0,     0,    14,     0,    32
+       0,    16,    19,    33,    35,     0,     0,     0,     0,    44,
+      45,    46,     0,    39,    42,     0,     0,     0,     0,     0,
+       0,     0,     0,    34,    36,     0,    26,     0,    49,    27,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,    28,
+       0,     0,    18,    25,    43,    51,     0,    48,    37,    38,
+      41,    40,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,    20,     0,    47,     0,    52,    53,    54,    56,    55,
+      29,     0,    31,     0,     4,    15,    50,    30,     0,     0,
+       0,     0,     0,    14,     0,    32
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -27,   -27,    15,   120,   -27,   -22,   -27,   -27,   123,   -27,
-      70,   -27,   -25,   -27,   -27,   -27,   -27,   -27,   -17,    -5,
-      -4,   -27,   -27,     3
+     -36,   -36,    19,   110,   -36,    22,   -36,   -36,   123,   -36,
+      72,   -36,   -25,   -36,   -36,   -36,   -36,   -36,   -16,    38,
+      39,   -36,   -36,    57
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
       -1,     2,     7,     8,     9,    23,    12,    13,    14,    40,
-      41,    42,    34,    35,    36,    37,    38,    45,    75,    51,
-      52,    85,    86,    76
+      41,    42,    34,    35,    36,    37,    38,    45,    74,    53,
+      54,    86,    87,    75
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -757,57 +757,57 @@ static const yytype_int8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      44,    67,    83,    46,   114,    74,   115,    91,     1,    50,
-      21,    22,    55,     5,    68,    69,     3,    68,    69,    10,
-      64,    68,    69,    68,    69,   123,   113,    47,     4,    65,
-      48,    49,   119,     6,    68,    69,    72,    68,    69,    11,
-      25,    43,    68,    69,    15,    70,    71,    68,    69,    84,
-      26,    27,    28,    29,    30,    31,    32,    33,   101,   102,
-      77,    78,   100,    87,    88,    16,    89,    90,    17,   104,
-      18,    24,   110,   111,   112,   105,   106,   107,   108,   109,
-      39,    68,    69,    53,    54,    56,   116,    92,    93,    94,
-      95,    96,    57,    25,    63,   122,   117,    58,   124,    59,
-      60,    25,   121,    26,    27,    28,    29,    30,    31,    32,
-      33,    26,    27,    28,    29,    30,    31,    32,    33,    61,
-      62,    66,    73,    79,    97,    98,    80,    81,   120,   118,
-      99,   103,    82,     0,     0,    20,    19
+      44,    21,    22,    69,    84,     1,    79,   114,     3,   115,
+      48,     4,    52,    25,    43,    70,    71,    59,    70,    71,
+      64,    70,    71,    26,    27,    28,    29,    30,    31,    32,
+      65,     5,    67,    49,    25,    63,     6,    50,    51,    10,
+      83,    16,    33,    15,    26,    27,    28,    29,    30,    31,
+      32,   120,    85,    11,    25,    70,    71,    17,    72,    73,
+      70,    71,   100,    33,    26,    27,    28,    29,    30,    31,
+      32,   113,   110,   111,   112,    18,   105,   106,   107,   108,
+     109,    70,    71,    33,    70,    71,   117,    24,   116,    39,
+      92,    93,    94,    95,    96,    55,   123,   118,   124,   125,
+      70,    71,   101,   102,   122,    46,    70,    71,    88,    89,
+      56,    90,    91,    76,    77,    47,    57,    58,    61,    60,
+      62,    66,    68,    78,    80,    20,    81,   104,   121,    97,
+      98,    99,   103,   119,    82,     0,    19
 };
 
 static const yytype_int8 yycheck[] =
 {
-      25,     8,    12,    11,     6,     8,     8,     8,     3,    26,
-      36,    37,    29,     6,    24,    25,    35,    24,    25,    35,
-      45,    24,    25,    24,    25,    15,    13,    35,     0,    46,
-      38,    39,    14,     9,    24,    25,    53,    24,    25,     4,
-       6,     7,    24,    25,     8,    26,    27,    24,    25,    66,
-      16,    17,    18,    19,    20,    21,    22,    23,    80,    81,
-      57,    58,    79,    68,    69,    10,    70,    71,    35,    86,
-       7,    11,    97,    98,    99,    92,    93,    94,    95,    96,
-       9,    24,    25,    35,    35,    11,   111,    30,    31,    32,
-      33,    34,    11,     6,     7,   120,   113,    11,   123,    17,
-      35,     6,   119,    16,    17,    18,    19,    20,    21,    22,
-      23,    16,    17,    18,    19,    20,    21,    22,    23,    12,
-       5,    11,     8,    35,    12,    12,    10,    10,     7,   114,
-      12,    12,    62,    -1,    -1,    15,    13
+      25,    36,    37,     8,    12,     3,     8,     6,    34,     8,
+      11,     0,    28,     6,     7,    23,    24,    33,    23,    24,
+      45,    23,    24,    16,    17,    18,    19,    20,    21,    22,
+      46,     6,    48,    34,     6,     7,     9,    38,    39,    34,
+       8,    10,    35,     8,    16,    17,    18,    19,    20,    21,
+      22,    14,    68,     4,     6,    23,    24,    34,    25,    26,
+      23,    24,    78,    35,    16,    17,    18,    19,    20,    21,
+      22,    13,    97,    98,    99,     7,    92,    93,    94,    95,
+      96,    23,    24,    35,    23,    24,   111,    11,   104,     9,
+      29,    30,    31,    32,    33,    11,   121,   113,    15,   124,
+      23,    24,    80,    81,   120,    34,    23,    24,    70,    71,
+      11,    72,    73,    56,    57,    34,    11,    16,    12,    34,
+       5,     8,    11,    34,    10,    15,    10,     5,     7,    12,
+      12,    12,    12,   114,    62,    -1,    13
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
      symbol of state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     3,    41,    35,     0,     6,     9,    42,    43,    44,
-      35,     4,    46,    47,    48,     8,    10,    35,     7,    48,
+       0,     3,    41,    34,     0,     6,     9,    42,    43,    44,
+      34,     4,    46,    47,    48,     8,    10,    34,     7,    48,
       43,    36,    37,    45,    11,     6,    16,    17,    18,    19,
-      20,    21,    22,    23,    52,    53,    54,    55,    56,     9,
-      49,    50,    51,     7,    52,    57,    11,    35,    38,    39,
-      58,    59,    60,    35,    35,    58,    11,    11,    11,    17,
-      35,    12,     5,     7,    52,    58,    11,     8,    24,    25,
-      26,    27,    58,     8,     8,    58,    63,    63,    63,    35,
-      10,    10,    50,    12,    58,    61,    62,    59,    59,    60,
-      60,     8,    30,    31,    32,    33,    34,    12,    12,    12,
-      58,    45,    45,    12,    58,    58,    58,    58,    58,    58,
-      52,    52,    52,    13,     6,     8,    52,    58,    42,    14,
-       7,    58,    52,    15,    52
+      20,    21,    22,    35,    52,    53,    54,    55,    56,     9,
+      49,    50,    51,     7,    52,    57,    34,    34,    11,    34,
+      38,    39,    58,    59,    60,    11,    11,    11,    16,    58,
+      34,    12,     5,     7,    52,    58,     8,    58,    11,     8,
+      23,    24,    25,    26,    58,    63,    63,    63,    34,     8,
+      10,    10,    50,     8,    12,    58,    61,    62,    59,    59,
+      60,    60,    29,    30,    31,    32,    33,    12,    12,    12,
+      58,    45,    45,    12,     5,    58,    58,    58,    58,    58,
+      52,    52,    52,    13,     6,     8,    58,    52,    58,    42,
+      14,     7,    58,    52,    15,    52
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
@@ -829,7 +829,7 @@ static const yytype_int8 yyr2[] =
        4,     1,     1,     1,     1,     4,     3,     3,     3,     5,
        6,     5,    10,     2,     3,     1,     2,     3,     3,     1,
        3,     3,     1,     3,     1,     1,     1,     4,     1,     0,
-       2,     1,     3,     3,     3,     3,     3
+       3,     1,     3,     3,     3,     3,     3
 };
 
 
@@ -1329,7 +1329,7 @@ yyreduce:
 
   case 5:
 #line 54 "tarea5.y"
-                                              {}
+                                                  {}
 #line 1334 "tarea5.tab.c"
     break;
 
@@ -1343,298 +1343,320 @@ yyreduce:
 #line 58 "tarea5.y"
                                                   { if(!flag){
                                                      if(!insertInTable(&tableRoot,(yyvsp[-2].palabra),(yyvsp[0].entero),0,0))
-                                                      error(5,(yyvsp[-2].palabra));
+                                                        error(5,(yyvsp[-2].palabra));
+                                                    }else{
+                                                      if(!insertInTable(&localRoot,(yyvsp[-2].palabra),(yyvsp[0].entero),0,0))
+                                                        error(5,(yyvsp[-2].palabra));
                                                     }
-                                                    if(!insertInTable(&localRoot,(yyvsp[-2].palabra),(yyvsp[0].entero),0,0))
-                                                      error(5,(yyvsp[-2].palabra));
                                                   }
-#line 1352 "tarea5.tab.c"
+#line 1353 "tarea5.tab.c"
     break;
 
   case 8:
-#line 67 "tarea5.y"
+#line 68 "tarea5.y"
             {(yyval.entero)=(yyvsp[0].entero);}
-#line 1358 "tarea5.tab.c"
+#line 1359 "tarea5.tab.c"
     break;
 
   case 9:
-#line 68 "tarea5.y"
+#line 69 "tarea5.y"
               {(yyval.entero)=(yyvsp[0].entero);}
-#line 1364 "tarea5.tab.c"
+#line 1365 "tarea5.tab.c"
     break;
 
   case 14:
-#line 79 "tarea5.y"
+#line 80 "tarea5.y"
                                                                                          {if(!insertInFunTable(&funTableRoot,(yyvsp[-9].palabra),localRoot,paramRoot,(yyvsp[0].arbol),(yyvsp[-4].entero)))
                                                                                             error(6,(yyvsp[-9].palabra));
                                                                                           localRoot=NULL;
                                                                                           paramRoot=NULL;
                                                                                          }
-#line 1374 "tarea5.tab.c"
+#line 1375 "tarea5.tab.c"
     break;
 
   case 15:
-#line 84 "tarea5.y"
+#line 85 "tarea5.y"
                                                                                          {if(!insertInFunTable(&funTableRoot,(yyvsp[-6].palabra),NULL,paramRoot,NULL,(yyvsp[-1].entero)))
                                                                                             error(6,(yyvsp[-6].palabra));
                                                                                           localRoot=NULL;
                                                                                           paramRoot=NULL;
                                                                                          }
-#line 1384 "tarea5.tab.c"
+#line 1385 "tarea5.tab.c"
     break;
 
   case 20:
-#line 99 "tarea5.y"
+#line 100 "tarea5.y"
                               {if(!insertInTable(&paramRoot,(yyvsp[-2].palabra),(yyvsp[0].entero),0,0))
                                 error(5,(yyvsp[-2].palabra));
                               }
-#line 1392 "tarea5.tab.c"
+#line 1393 "tarea5.tab.c"
     break;
 
   case 21:
-#line 104 "tarea5.y"
+#line 105 "tarea5.y"
                     {(yyval.arbol)=(yyvsp[0].arbol);
                     }
-#line 1399 "tarea5.tab.c"
+#line 1400 "tarea5.tab.c"
     break;
 
   case 22:
-#line 106 "tarea5.y"
+#line 107 "tarea5.y"
                     {(yyval.arbol)=(yyvsp[0].arbol);
                     }
-#line 1406 "tarea5.tab.c"
+#line 1407 "tarea5.tab.c"
     break;
 
   case 23:
-#line 108 "tarea5.y"
+#line 109 "tarea5.y"
                     {(yyval.arbol)=(yyvsp[0].arbol);
                     }
-#line 1413 "tarea5.tab.c"
+#line 1414 "tarea5.tab.c"
     break;
 
   case 24:
-#line 110 "tarea5.y"
+#line 111 "tarea5.y"
                     {(yyval.arbol)=(yyvsp[0].arbol);
                     }
-#line 1420 "tarea5.tab.c"
+#line 1421 "tarea5.tab.c"
     break;
 
   case 25:
-#line 114 "tarea5.y"
-                                    {fun_Valid_SET((yyvsp[-2].palabra),(yyvsp[-1].arbol),tableRoot);
+#line 115 "tarea5.y"
+                                    {
+                                     fun_Valid_SET((yyvsp[-2].palabra),(yyvsp[-1].arbol),tableRoot);
                                      (yyval.arbol)=newTreeNode((yyvsp[-3].palabra), (yyvsp[-2].palabra), 0, 0, 0, (yyvsp[-1].arbol), NULL, NULL, NULL);
                                     }
-#line 1428 "tarea5.tab.c"
+#line 1430 "tarea5.tab.c"
     break;
 
   case 26:
-#line 117 "tarea5.y"
+#line 119 "tarea5.y"
                                     {(yyval.arbol)=newTreeNode((yyvsp[-2].palabra), (yyvsp[-1].palabra), 0, 0, 0, NULL, NULL, NULL, NULL);
                                     }
-#line 1435 "tarea5.tab.c"
+#line 1437 "tarea5.tab.c"
     break;
 
   case 27:
-#line 119 "tarea5.y"
-                                    {(yyval.arbol)=newTreeNode((yyvsp[-2].palabra), NULL, 0, 0, 0, (yyvsp[-1].arbol), NULL, NULL, NULL);
+#line 121 "tarea5.y"
+                                    {
+                                     (yyval.arbol)=newTreeNode((yyvsp[-2].palabra), NULL, 0, 0, 0, (yyvsp[-1].arbol), NULL, NULL, NULL);
                                     }
-#line 1442 "tarea5.tab.c"
+#line 1445 "tarea5.tab.c"
     break;
 
   case 28:
-#line 121 "tarea5.y"
-                                     {//ver que onda
+#line 124 "tarea5.y"
+                                    {
+                                      (yyval.arbol)=newTreeNode((yyvsp[-2].palabra), NULL, 0, 0, 0, (yyvsp[-1].arbol), NULL, NULL, NULL);
                                     }
-#line 1449 "tarea5.tab.c"
+#line 1453 "tarea5.tab.c"
     break;
 
   case 29:
-#line 125 "tarea5.y"
+#line 129 "tarea5.y"
                                              {(yyval.arbol)=newTreeNode((yyvsp[-4].palabra), NULL, 0, 0, 0, (yyvsp[-2].arbol), (yyvsp[0].arbol), NULL, NULL);//crear nodo if: type "if" branch1: expresion ($3) branch2: stmt ($5)
                                              }
-#line 1456 "tarea5.tab.c"
+#line 1460 "tarea5.tab.c"
     break;
 
   case 30:
-#line 127 "tarea5.y"
+#line 131 "tarea5.y"
                                                       {(yyval.arbol)=newTreeNode((yyvsp[-5].palabra), NULL, 0, 0, 0, (yyvsp[-3].arbol), (yyvsp[-1].arbol), (yyvsp[0].arbol), NULL);//crear nodo ifelse: type "ifelse" branch3: expresion ($3) branch2: stmt ($5) branch3: stmt ($6)
                                                       }
-#line 1463 "tarea5.tab.c"
+#line 1467 "tarea5.tab.c"
     break;
 
   case 31:
-#line 131 "tarea5.y"
+#line 135 "tarea5.y"
                                                   {(yyval.arbol)=newTreeNode((yyvsp[-4].palabra), NULL, 0, 0, 0, (yyvsp[-2].arbol), (yyvsp[0].arbol), NULL, NULL);//crear nodo while: type "while" branch1: expresion ($3) branch2: stmt ($5)
                                                   }
-#line 1470 "tarea5.tab.c"
+#line 1474 "tarea5.tab.c"
     break;
 
   case 32:
-#line 133 "tarea5.y"
+#line 137 "tarea5.y"
                                                       {(yyval.arbol)=newTreeNode((yyvsp[-9].palabra), (yyvsp[-7].palabra), 0, 0, 0, (yyvsp[-6].arbol), (yyvsp[-4].arbol), (yyvsp[-2].arbol), (yyvsp[0].arbol));//crear nodo if: type "for" branch1: ID ($3) branch2: expr ($4) branch3: expr ($6) branch4: expr ($8) branch5: stmt ($10)
                                                       }
-#line 1477 "tarea5.tab.c"
+#line 1481 "tarea5.tab.c"
     break;
 
   case 33:
-#line 136 "tarea5.y"
+#line 140 "tarea5.y"
                              {(yyval.arbol)=NULL;
                              }
-#line 1484 "tarea5.tab.c"
+#line 1488 "tarea5.tab.c"
     break;
 
   case 34:
-#line 138 "tarea5.y"
+#line 142 "tarea5.y"
                                       {(yyval.arbol)=treeAux->name;
                                        datbAux(&treeAux);
                                       }
-#line 1492 "tarea5.tab.c"
+#line 1496 "tarea5.tab.c"
     break;
 
   case 35:
-#line 143 "tarea5.y"
+#line 147 "tarea5.y"
                           {(yyval.arbol)=(yyvsp[0].arbol);
                            iatbAux(&treeAux,(yyvsp[0].arbol));
                           }
-#line 1500 "tarea5.tab.c"
+#line 1504 "tarea5.tab.c"
     break;
 
   case 36:
-#line 146 "tarea5.y"
+#line 150 "tarea5.y"
                           {((yyvsp[-1].arbol)->next)=(yyvsp[0].arbol);
                            (yyval.arbol)=(yyvsp[0].arbol);
                           }
-#line 1508 "tarea5.tab.c"
+#line 1512 "tarea5.tab.c"
     break;
 
   case 37:
-#line 151 "tarea5.y"
+#line 155 "tarea5.y"
                        {aux=fun_Valid_Dos((yyvsp[-2].arbol),(yyvsp[0].arbol));
                         (yyval.arbol)=newTreeNode((yyvsp[-1].palabra), NULL, aux, 0, 0, (yyvsp[-2].arbol), (yyvsp[0].arbol), NULL, NULL);
                        }
-#line 1516 "tarea5.tab.c"
+#line 1520 "tarea5.tab.c"
     break;
 
   case 38:
-#line 154 "tarea5.y"
+#line 158 "tarea5.y"
                        {aux=fun_Valid_Dos((yyvsp[-2].arbol),(yyvsp[0].arbol));
                         (yyval.arbol)=newTreeNode((yyvsp[-1].palabra), NULL, aux, 0, 0, (yyvsp[-2].arbol), (yyvsp[0].arbol), NULL, NULL);
                        }
-#line 1524 "tarea5.tab.c"
+#line 1528 "tarea5.tab.c"
     break;
 
   case 39:
-#line 157 "tarea5.y"
+#line 161 "tarea5.y"
                        {(yyval.arbol)=(yyvsp[0].arbol);}
-#line 1530 "tarea5.tab.c"
+#line 1534 "tarea5.tab.c"
     break;
 
   case 40:
-#line 160 "tarea5.y"
+#line 164 "tarea5.y"
                          {aux=fun_Valid_Dos((yyvsp[-2].arbol),(yyvsp[0].arbol));
                           (yyval.arbol)=newTreeNode((yyvsp[-1].palabra), NULL, aux, 0, 0, (yyvsp[-2].arbol), (yyvsp[0].arbol), NULL, NULL);
                          }
-#line 1538 "tarea5.tab.c"
+#line 1542 "tarea5.tab.c"
     break;
 
   case 41:
-#line 163 "tarea5.y"
+#line 167 "tarea5.y"
                          {aux=fun_Valid_Dos((yyvsp[-2].arbol),(yyvsp[0].arbol));
                           (yyval.arbol)=newTreeNode((yyvsp[-1].palabra), NULL, aux, 0, 0, (yyvsp[-2].arbol), (yyvsp[0].arbol), NULL, NULL);
                          }
-#line 1546 "tarea5.tab.c"
+#line 1550 "tarea5.tab.c"
     break;
 
   case 42:
-#line 166 "tarea5.y"
+#line 170 "tarea5.y"
                          {(yyval.arbol)=(yyvsp[0].arbol);}
-#line 1552 "tarea5.tab.c"
+#line 1556 "tarea5.tab.c"
     break;
 
   case 43:
-#line 169 "tarea5.y"
+#line 173 "tarea5.y"
                                {(yyval.arbol)=(yyvsp[-1].arbol);}
-#line 1558 "tarea5.tab.c"
+#line 1562 "tarea5.tab.c"
     break;
 
   case 44:
-#line 170 "tarea5.y"
-                               {aux=fun_ID((yyvsp[0].palabra),tableRoot);
+#line 174 "tarea5.y"
+                               {aux=fun_ID((yyvsp[0].palabra),tableRoot,paramRoot,localRoot);
                                 (yyval.arbol)=newTreeNode(strdup("id"), (yyvsp[0].palabra), aux, 0, 0, NULL, NULL, NULL, NULL);}
-#line 1565 "tarea5.tab.c"
+#line 1569 "tarea5.tab.c"
     break;
 
   case 45:
-#line 172 "tarea5.y"
+#line 176 "tarea5.y"
                                {(yyval.arbol)=newTreeNode(strdup("int"), NULL, 1, (yyvsp[0].entero), 0, NULL, NULL, NULL, NULL);}
-#line 1571 "tarea5.tab.c"
+#line 1575 "tarea5.tab.c"
     break;
 
   case 46:
-#line 173 "tarea5.y"
+#line 177 "tarea5.y"
                                {(yyval.arbol)=newTreeNode(strdup("float"), NULL, 2, 0, (yyvsp[0].real), NULL, NULL, NULL, NULL);}
-#line 1577 "tarea5.tab.c"
+#line 1581 "tarea5.tab.c"
     break;
 
   case 47:
-#line 174 "tarea5.y"
+#line 178 "tarea5.y"
                                        {funSearchTmp = searchFun(funTableRoot, (yyvsp[-3].palabra)); //Buscar si la funcion ya está en la tabla
+                                        struct treeNode* tmp;
                                         if(funSearchTmp == NULL){   //Si no está, error.
                                           error(7, (yyvsp[-3].palabra));
                                         }else{    //Si está, checar que los tipos de parámetro coincidan.
-                                          (yyval.arbol)=newTreeNode((yyvsp[-3].palabra), NULL, 2, 0, 0, (yyvsp[-1].arbol), NULL, NULL, NULL);//Si los tipos coinciden, se agrega 
-                                          if(funcParamCheck(funTableRoot, funSearchTmp) == 0){
-                                          }else{                                                      //al arbol un nodo de funcion apuntando a sus parametros
+                                          tmp=newTreeNode(strdup("fun"), (yyvsp[-3].palabra), funSearchTmp->tipo, 0, 0, (yyvsp[-1].arbol), funSearchTmp->decTree, NULL, NULL);//Si los tipos coinciden, se agrega 
+                                          if(funcParamCheck(tmp, funSearchTmp) != 0){
                                             error(8, (yyvsp[-3].palabra));         //Si los tipos entre la llamada y la declaracion no coinciden, error.
-                                          }
-                                            
+                                          }else
+                                            (yyval.arbol)=tmp;                                            
                                         }
                                        }
-#line 1594 "tarea5.tab.c"
+#line 1598 "tarea5.tab.c"
     break;
 
-  case 52:
+  case 48:
+#line 192 "tarea5.y"
+                               {(yyval.arbol)=(yyvsp[0].arbol);}
+#line 1604 "tarea5.tab.c"
+    break;
+
+  case 50:
 #line 196 "tarea5.y"
-                                  {fun_Valid_Dos((yyvsp[-2].arbol),(yyvsp[0].arbol));
-                                   (yyval.arbol)=newTreeNode((yyvsp[-1].palabra), NULL, 0, 0, 0, (yyvsp[-2].arbol), (yyvsp[0].arbol), NULL, NULL);
-                                  }
-#line 1602 "tarea5.tab.c"
-    break;
-
-  case 53:
-#line 199 "tarea5.y"
-                                  {fun_Valid_Dos((yyvsp[-2].arbol),(yyvsp[0].arbol));
-                                   (yyval.arbol)=newTreeNode((yyvsp[-1].palabra), NULL, 0, 0, 0, (yyvsp[-2].arbol), (yyvsp[0].arbol), NULL, NULL);
-                                  }
+                               {(yyvsp[-2].arbol)->next=(yyvsp[0].arbol);}
 #line 1610 "tarea5.tab.c"
     break;
 
-  case 54:
-#line 202 "tarea5.y"
+  case 51:
+#line 197 "tarea5.y"
+                               {(yyval.arbol)=(yyvsp[0].arbol);}
+#line 1616 "tarea5.tab.c"
+    break;
+
+  case 52:
+#line 200 "tarea5.y"
                                   {fun_Valid_Dos((yyvsp[-2].arbol),(yyvsp[0].arbol));
                                    (yyval.arbol)=newTreeNode((yyvsp[-1].palabra), NULL, 0, 0, 0, (yyvsp[-2].arbol), (yyvsp[0].arbol), NULL, NULL);
                                   }
-#line 1618 "tarea5.tab.c"
+#line 1624 "tarea5.tab.c"
+    break;
+
+  case 53:
+#line 203 "tarea5.y"
+                                  {fun_Valid_Dos((yyvsp[-2].arbol),(yyvsp[0].arbol));
+                                   (yyval.arbol)=newTreeNode((yyvsp[-1].palabra), NULL, 0, 0, 0, (yyvsp[-2].arbol), (yyvsp[0].arbol), NULL, NULL);
+                                  }
+#line 1632 "tarea5.tab.c"
+    break;
+
+  case 54:
+#line 206 "tarea5.y"
+                                  {fun_Valid_Dos((yyvsp[-2].arbol),(yyvsp[0].arbol));
+                                   (yyval.arbol)=newTreeNode((yyvsp[-1].palabra), NULL, 0, 0, 0, (yyvsp[-2].arbol), (yyvsp[0].arbol), NULL, NULL);
+                                  }
+#line 1640 "tarea5.tab.c"
     break;
 
   case 55:
-#line 205 "tarea5.y"
+#line 209 "tarea5.y"
                                   {fun_Valid_Dos((yyvsp[-2].arbol),(yyvsp[0].arbol));
                                    (yyval.arbol)=newTreeNode((yyvsp[-1].palabra), NULL, 0, 0, 0, (yyvsp[-2].arbol), (yyvsp[0].arbol), NULL, NULL);
                                   }
-#line 1626 "tarea5.tab.c"
+#line 1648 "tarea5.tab.c"
     break;
 
   case 56:
-#line 208 "tarea5.y"
+#line 212 "tarea5.y"
                                   {fun_Valid_Dos((yyvsp[-2].arbol),(yyvsp[0].arbol));
                                    (yyval.arbol)=newTreeNode((yyvsp[-1].palabra), NULL, 0, 0, 0, (yyvsp[-2].arbol), (yyvsp[0].arbol), NULL, NULL);
                                   }
-#line 1634 "tarea5.tab.c"
+#line 1656 "tarea5.tab.c"
     break;
 
 
-#line 1638 "tarea5.tab.c"
+#line 1660 "tarea5.tab.c"
 
       default: break;
     }
@@ -1828,7 +1850,7 @@ yyreturn:
   return yyresult;
 }
 
-#line 213 "tarea5.y"
+#line 217 "tarea5.y"
 
 
 int yyerror(char const * s) {
@@ -1840,6 +1862,6 @@ int main(int argc, char * argv[]){
   extern FILE * yyin;
   yyin = fopen (argv[1], "r");
   yyparse();
-  runTree(treeRoot, tableRoot);
+  runTree(treeRoot, tableRoot, funTableRoot);
 }
 

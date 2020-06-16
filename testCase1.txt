@@ -6,7 +6,7 @@ program test
     fun suma (var x1: int, var x2: int): int
     {}
     {
-        return (x1 + x2);
+        return x1 + x2;
     }
 }
 {
