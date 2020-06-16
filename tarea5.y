@@ -217,10 +217,10 @@ int yyerror(char const * s) {
   return 1;
 }
 
-void main(int argc, char * argv[]){
+int main(int argc, char * argv[]){
   extern FILE * yyin;
   yyin = fopen (argv[1], "r");
   yyparse();
-  //runTree(treeRoot, tableRoot);
+  runTree(treeRoot, tableRoot);
 }
 
