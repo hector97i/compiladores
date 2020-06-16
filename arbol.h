@@ -34,7 +34,7 @@ struct funNode{
 
 struct node{
 	int tipo;
-	char name[20];
+	char *name;
 	int valInt;
 	float valFloat;
 	struct node *next;	
@@ -72,7 +72,7 @@ void datbAux(struct auxNode **pth){//Delete at the beginning
 struct node* search(struct node *head, char* ref);
 struct funNode* searchFun(struct funNode *head, char* ref);
 void runTree(struct treeNode *head, struct node *tableRoot,struct funNode* funTableRoot);
-void runTreeFun(struct treeNode *head, struct node *tableRoot,struct funNode* funTableRoot);
+void runTreeFun(struct treeNode **head, struct node *tableRoot,struct funNode* funTableRoot);
 void funFunction(struct treeNode *head, struct node *tableRoot,struct funNode* funTableRoot);
 
 /*
@@ -120,6 +120,15 @@ void printTree(struct treeNode *head){//Simple print method for the list
 	}
 }
 
+void printTable(struct node *head){//Simple print method for the list
+	printf("entramos a printTable\n");
+	while(head){
+		printf("%s: tipo %d valInt:%d valFloat: %f\n",head->name,head->tipo,head->valInt, head->valFloat);
+		head=head->next;
+	}
+}
+
+
 ///////////////////////////////////////////////////////////////////////
 //funciones que originalmentente estaban en funciones tabla, pero debido a la integración de treeNode es más factible moverlas acá
 //son funciones dedicadas a validacion de tipos y errores de validacion
@@ -151,9 +160,14 @@ void error(int a, char*ref){
 	exit(1);
 }
 
-void fun_Valid_SET(char *ID,struct treeNode *expr, struct node *tableRoot){
+void fun_Valid_SET(char *ID,struct treeNode *expr, struct node *tableRoot, struct node *param, struct node *local){
 	struct node *copiaID;
-	copiaID=search(tableRoot,ID);
+	copiaID=search(param,ID);
+	if(copiaID==NULL){
+		copiaID=search(local,ID);
+		if(copiaID==NULL)
+			copiaID=search(tableRoot,ID);
+	}
 	if(copiaID!=NULL){
 		if(copiaID->tipo != expr->tipo){
 			error(3, ID);
@@ -251,9 +265,14 @@ int compare(char*type){//It returns 1 if strings are equal
 void exprFun(struct treeNode *head, struct node *tableRoot,struct funNode* funTableRoot){
 	if(head!=NULL){
 		struct node *ID;
-		exprFun(head->branch1, tableRoot, funTableRoot);
-		exprFun(head->branch2, tableRoot, funTableRoot);
-		switch(compare(head->type)){
+		int comp=compare(head->type);
+		if(comp!=19){
+			//printf("%s q\n", head->branch1->type);
+			//printf("%s c\n", head->branch2->type);
+			exprFun(head->branch1, tableRoot, funTableRoot);
+			exprFun(head->branch2, tableRoot, funTableRoot);
+		}
+		switch(comp){
 			case 8://add
 			head->natVal=head->branch1->natVal+head->branch2->natVal;
 			head->realVal=head->branch1->realVal+head->branch2->realVal;
@@ -310,7 +329,9 @@ void setFunction(struct treeNode *head, struct node *tableRoot,struct funNode* f
 
 void readFunction(struct treeNode *head, struct node *tableRoot,struct funNode* funTableRoot){
 	struct node *ID;
+	printf("antes del ID");
 	ID=search(tableRoot, head->charVal);
+	printf("despues del ID");
 	if(ID->tipo==1)
 		scanf("%d",&(ID->valInt));
 	else
@@ -445,34 +466,69 @@ void forFunction(struct treeNode *head, struct node *tableRoot,struct funNode* f
 
 struct node * localCopy(struct node * root, struct node * globalVar){
 
-	struct node * tmp = malloc(sizeof(struct node));
-	struct node * pth = tmp;
+	struct node * tmp;
+	struct node * pth;
+
+	if(root==NULL){
+		tmp = globalVar;
+		return tmp;
+	}
+
+	tmp=(struct node*)malloc(sizeof(struct node));
+	pth = tmp;
+	tmp->tipo = root->tipo;
+	tmp->name=root->name;
+	tmp->valInt = root->valInt;
+	tmp->valFloat = root->valFloat;
+	root = root->next;
 
 	while(root != NULL){
-
-		tmp = root;
-		tmp->next = malloc(sizeof(struct node));
-		tmp = tmp->next;
-		root = root->next; 
+		tmp->next=(struct node*)malloc(sizeof(struct node));
+		tmp=tmp->next;
+		tmp->tipo = root->tipo;
+		tmp->name=root->name;
+		tmp->valInt = root->valInt;
+		tmp->valFloat = root->valFloat;
+		root = root->next;
 	}	
 	tmp->next = globalVar;
 	return pth;
 }
 
-struct node * paramCopy(struct treeNode * param, struct node * localVar){
+struct node * paramCopy(struct treeNode * param, struct node * paramTree, struct node * localVar,struct node* tableRoot,struct funNode* funTableRoot){
 
-	struct node * tmp = malloc(sizeof(struct node));
-	struct node * pth = tmp;
+	struct node * tmp;
+	struct node * pth;
+	struct node * pTAux;
+
+	pTAux=paramTree;
+	
+	if(param==NULL){
+		tmp = localVar;
+		return tmp;
+	}
+
+	tmp=(struct node*)malloc(sizeof(struct node));
+	pth = tmp;
+	exprFun(param,tableRoot,funTableRoot);
+	tmp->tipo = param->tipo;
+	tmp->name=strdup(pTAux->name);
+	tmp->valInt = param->natVal;
+	tmp->valFloat = param->realVal;
+	param = param->next;
+	pTAux = pTAux->next;
+
 
 	while(param != NULL){
-
+		tmp->next=(struct node*)malloc(sizeof(struct node));
+		tmp=tmp->next;
+		exprFun(param,tableRoot,funTableRoot);
 		tmp->tipo = param->tipo;
-		strcpy(tmp->name, param->charVal);
+		tmp->name=strdup(pTAux->name);
 		tmp->valInt = param->natVal;
 		tmp->valFloat = param->realVal;
-		tmp->next = malloc(sizeof(struct node));
-		tmp = tmp->next;
-		param = param->next; 
+		param = param->next;
+		pTAux = pTAux->next;
 	}	
 	tmp->next = localVar;
 	return pth;
@@ -482,23 +538,24 @@ void funFunction(struct treeNode *head, struct node *tableRoot,struct funNode* f
 	struct funNode* funSearchTmp;
 	funSearchTmp = searchFun(funTableRoot, head->charVal);
 	struct node* newRoot;
-	newRoot = paramCopy(head->branch1,localCopy(funSearchTmp->paramTree,tableRoot));
-	runTreeFun(head->branch2,newRoot, funTableRoot);
-	head->natVal=head->branch2->natVal;
-	head->realVal=head->branch2->realVal;
+	newRoot = paramCopy(head->branch1,funSearchTmp->paramTree,localCopy(funSearchTmp->varTree,tableRoot),tableRoot,funTableRoot);
+	runTreeFun(&(head->branch2),newRoot, funTableRoot);
+	head->natVal= head->branch2->natVal;
+	head->realVal= head->branch2->realVal;
 }
 
 
-void returnFunction(struct treeNode *head, struct node *tableRoot,struct funNode* funTableRoot){
-	expresionFun(head->branch1,tableRoot, funTableRoot);
-	head->natVal=head->branch1->natVal;
-	head->realVal=head->branch1->realVal;
-	head->next=NULL;
+void returnFunction(struct treeNode **head, struct node *tableRoot,struct funNode* funTableRoot){
+	exprFun((*head)->branch1,tableRoot, funTableRoot);
+	(*head)->natVal=(*head)->branch1->natVal;
+	(*head)->realVal=(*head)->branch1->realVal;
+	(*head)->next=NULL;
 }
 
 
 void runTree(struct treeNode *head, struct node *tableRoot,struct funNode* funTableRoot){
 	while(head){
+		printf("%s\n", head->type);
 		switch(compare(head->type)){
 			case 1://set
 			setFunction(head, tableRoot, funTableRoot);
@@ -531,42 +588,42 @@ void runTree(struct treeNode *head, struct node *tableRoot,struct funNode* funTa
 	}
 }
 
-void runTreeFun(struct treeNode *head, struct node *tableRoot,struct funNode* funTableRoot){
+void runTreeFun(struct treeNode **head, struct node *tableRoot,struct funNode* funTableRoot){
 	struct treeNode *retorno;
 	retorno=NULL;
-	while(head){
-		switch(compare(head->type)){
+	while(*head){
+		switch(compare((*head)->type)){
 			case 1://set
-			setFunction(head, tableRoot, funTableRoot);
+			setFunction(*head, tableRoot, funTableRoot);
 			break;
 			case 2://read
-			readFunction(head, tableRoot, funTableRoot);
+			readFunction(*head, tableRoot, funTableRoot);
 			break;
 			case 3://print
-			printFunction(head, tableRoot, funTableRoot);
+			printFunction(*head, tableRoot, funTableRoot);
 			break;
 			case 4://if
-			ifFunction(head, tableRoot, funTableRoot);
+			ifFunction(*head, tableRoot, funTableRoot);
 			break;
 			case 5://ifelse
-			ifelseFunction(head, tableRoot, funTableRoot);
+			ifelseFunction(*head, tableRoot, funTableRoot);
 			break;
 			case 6://while
-			whileFunction(head, tableRoot, funTableRoot);
+			whileFunction(*head, tableRoot, funTableRoot);
 			break;
 			case 7://for
-			forFunction(head, tableRoot, funTableRoot);
+			forFunction(*head, tableRoot, funTableRoot);
 			break;
 			case 18://return
-			retorno=head;
+			retorno=*head;
 			returnFunction(head, tableRoot, funTableRoot);
 			break;
 			default:
 			printf("%s\n", "que paso papi");
 		}
-		head=head->next;
+		*head=(*head)->next;
 	}
-	head=retorno;
+	*head=retorno;
 }
 
 /////////////////////////////////////////////////////////////////////////
@@ -596,7 +653,7 @@ int compareTo(char*a,char*b){//It returns 1 if strings are equal
 void iatb(struct node **pth, int type, int vInt, float vFloat, char* ref){//Insert at the beginning
 	struct node *tmp;
 	tmp = (struct node *)malloc(sizeof(struct node));
-	strcpy(tmp -> name,ref);
+	tmp ->name=strdup(ref);
 	tmp ->tipo=type;
 	tmp ->valInt=vInt;
 	tmp ->valFloat=vFloat;
@@ -696,8 +753,8 @@ int insertInFunTable(struct funNode **head, char* ref, struct node *var, struct 
 			//función de error(6,$2); aquí se comparan los paramRoot
 			busqueda->decTree=dec;
 			busqueda->varTree=var;
-			busqueda->paramTree=var;
 			busqueda->tipo=tipo;
+			busqueda->paramTree=param;
 			return 1;
 		}
 		return 0;
@@ -719,7 +776,6 @@ int funcParamCheck(struct treeNode * root, struct funNode * call){
 
 	while(tmp != NULL){
 		if(tmp->tipo == tmp2->tipo){
-			tmp->charVal=tmp2->name;
 			tmp = tmp->next;
 			tmp2 = tmp2->next;
 		}else{

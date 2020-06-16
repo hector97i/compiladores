@@ -1,9 +1,8 @@
-/* A Bison parser, made by GNU Bison 3.6.3.  */
+/* A Bison parser, made by GNU Bison 3.0.4.  */
 
 /* Bison interface for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2020 Free Software Foundation,
-   Inc.
+   Copyright (C) 1984, 1989-1990, 2000-2015 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -31,10 +30,6 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-/* DO NOT RELY ON FEATURES THAT ARE NOT DOCUMENTED in the manual,
-   especially those whose name start with YY_ or yy_.  They are
-   private implementation details that can be changed or removed.  */
-
 #ifndef YY_YY_TAREA5_TAB_H_INCLUDED
 # define YY_YY_TAREA5_TAB_H_INCLUDED
 /* Debug traces.  */
@@ -45,61 +40,57 @@
 extern int yydebug;
 #endif
 
-/* Token kinds.  */
+/* Token type.  */
 #ifndef YYTOKENTYPE
 # define YYTOKENTYPE
   enum yytokentype
   {
-    YYEMPTY = -2,
-    YYEOF = 0,                     /* "end of file"  */
-    YYerror = 256,                 /* error  */
-    YYUNDEF = 257,                 /* "invalid token"  */
-    PROGRAM = 258,                 /* PROGRAM  */
-    FUN = 259,                     /* FUN  */
-    COMA = 260,                    /* COMA  */
-    OPENKEY = 261,                 /* OPENKEY  */
-    CLOSEKEY = 262,                /* CLOSEKEY  */
-    PUNTOCOMA = 263,               /* PUNTOCOMA  */
-    VAR = 264,                     /* VAR  */
-    DOSPUNTOS = 265,               /* DOSPUNTOS  */
-    OPENPAR = 266,                 /* OPENPAR  */
-    CLOSEPAR = 267,                /* CLOSEPAR  */
-    TO = 268,                      /* TO  */
-    STEP = 269,                    /* STEP  */
-    DO = 270,                      /* DO  */
-    SET = 271,                     /* SET  */
-    READ = 272,                    /* READ  */
-    PRINT = 273,                   /* PRINT  */
-    IF = 274,                      /* IF  */
-    IFELSE = 275,                  /* IFELSE  */
-    WHILE = 276,                   /* WHILE  */
-    FOR = 277,                     /* FOR  */
-    SUMA = 278,                    /* SUMA  */
-    RESTA = 279,                   /* RESTA  */
-    DIV = 280,                     /* DIV  */
-    MULTI = 281,                   /* MULTI  */
-    MODULO = 282,                  /* MODULO  */
-    EXPONEN = 283,                 /* EXPONEN  */
-    MENORQUE = 284,                /* MENORQUE  */
-    MAYORQUE = 285,                /* MAYORQUE  */
-    IGUAL = 286,                   /* IGUAL  */
-    MAYORIGUAL = 287,              /* MAYORIGUAL  */
-    MENORIGUAL = 288,              /* MENORIGUAL  */
-    ID = 289,                      /* ID  */
-    RETURN = 290,                  /* RETURN  */
-    INT = 291,                     /* INT  */
-    FLOAT = 292,                   /* FLOAT  */
-    NUMI = 293,                    /* NUMI  */
-    NUMF = 294                     /* NUMF  */
+    PROGRAM = 258,
+    FUN = 259,
+    COMA = 260,
+    OPENKEY = 261,
+    CLOSEKEY = 262,
+    PUNTOCOMA = 263,
+    VAR = 264,
+    DOSPUNTOS = 265,
+    OPENPAR = 266,
+    CLOSEPAR = 267,
+    TO = 268,
+    STEP = 269,
+    DO = 270,
+    SET = 271,
+    READ = 272,
+    PRINT = 273,
+    IF = 274,
+    IFELSE = 275,
+    WHILE = 276,
+    FOR = 277,
+    SUMA = 278,
+    RESTA = 279,
+    DIV = 280,
+    MULTI = 281,
+    MODULO = 282,
+    EXPONEN = 283,
+    MENORQUE = 284,
+    MAYORQUE = 285,
+    IGUAL = 286,
+    MAYORIGUAL = 287,
+    MENORIGUAL = 288,
+    ID = 289,
+    RETURN = 290,
+    INT = 291,
+    FLOAT = 292,
+    NUMI = 293,
+    NUMF = 294
   };
-  typedef enum yytokentype yytoken_kind_t;
 #endif
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
+
 union YYSTYPE
 {
-#line 25 "tarea5.y"
+#line 25 "tarea5.y" /* yacc.c:1909  */
 
   int entero;
   float real;
@@ -107,9 +98,9 @@ union YYSTYPE
   struct num* esNumero;
   struct treeNode* arbol;
 
-#line 111 "tarea5.tab.h"
-
+#line 102 "tarea5.tab.h" /* yacc.c:1909  */
 };
+
 typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1

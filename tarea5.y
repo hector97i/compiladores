@@ -9,9 +9,9 @@
 extern int yylex();
 int yyerror(char const * s);
 #include "arbol.h"
-struct node *tableRoot;
-struct node *localRoot;
-struct node *paramRoot;
+struct node *tableRoot=NULL;
+struct node *localRoot=NULL;
+struct node *paramRoot=NULL;
 struct treeNode *treeRoot;
 struct auxNode *treeAux;
 struct funNode *funTableRoot;
@@ -77,12 +77,14 @@ fun_decls : fun_decls fun_dec
           | fun_dec
 ;
 
-fun_dec : FUN ID OPENPAR oparams CLOSEPAR DOSPUNTOS tipo OPENKEY opt_decls CLOSEKEY stmt {if(!insertInFunTable(&funTableRoot,$2,localRoot,paramRoot,$11,$7))
+fun_dec : FUN ID OPENPAR oparams CLOSEPAR DOSPUNTOS tipo OPENKEY opt_decls CLOSEKEY stmt {printf("holi\n");
+                                                                                          if(!insertInFunTable(&funTableRoot,$2,localRoot,paramRoot,$11,$7))
                                                                                             error(6,$2);
                                                                                           localRoot=NULL;
                                                                                           paramRoot=NULL;
                                                                                          }
-        | FUN ID OPENPAR oparams CLOSEPAR DOSPUNTOS tipo PUNTOCOMA                       {if(!insertInFunTable(&funTableRoot,$2,NULL,paramRoot,NULL,$7))
+        | FUN ID OPENPAR oparams CLOSEPAR DOSPUNTOS tipo PUNTOCOMA                       {printf("entra a declaración\n");
+                                                                                          if(!insertInFunTable(&funTableRoot,$2,NULL,paramRoot,NULL,$7))
                                                                                             error(6,$2);
                                                                                           localRoot=NULL;
                                                                                           paramRoot=NULL;
@@ -112,16 +114,17 @@ stmt  : assign_stmt {$$=$1;
                     }
 ;
 
-assign_stmt : SET ID expr PUNTOCOMA {
-                                     fun_Valid_SET($2,$3,tableRoot);
+assign_stmt : SET ID expr PUNTOCOMA {printf("llegué a set con %s como id\n", $2);
+                                     fun_Valid_SET($2,$3,tableRoot,paramRoot,localRoot);
                                      $$=newTreeNode($1, $2, 0, 0, 0, $3, NULL, NULL, NULL);
                                     }
-            | READ ID PUNTOCOMA     {$$=newTreeNode($1, $2, 0, 0, 0, NULL, NULL, NULL, NULL);
+            | READ ID PUNTOCOMA     {printf("llegamos al read\n");
+                                      $$=newTreeNode($1, $2, 0, 0, 0, NULL, NULL, NULL, NULL);
                                     }
-            | PRINT expr PUNTOCOMA  {
+            | PRINT expr PUNTOCOMA  {printf("llegamos al print\n");
                                      $$=newTreeNode($1, NULL, 0, 0, 0, $2, NULL, NULL, NULL);
                                     }
-            | RETURN expr PUNTOCOMA {
+            | RETURN expr PUNTOCOMA {printf("llegamos a return\n");
                                       $$=newTreeNode($1, NULL, 0, 0, 0, $2, NULL, NULL, NULL);
                                     }
 ;
@@ -225,6 +228,7 @@ int main(int argc, char * argv[]){
   extern FILE * yyin;
   yyin = fopen (argv[1], "r");
   yyparse();
+  //printf("a mimir\n");
   runTree(treeRoot, tableRoot, funTableRoot);
 }
 
