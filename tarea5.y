@@ -175,8 +175,8 @@ factor : OPENPAR expr CLOSEPAR {$$=$2;}
                                         if(funSearchTmp == NULL){   //Si no está, error.
                                           error(7, $1);
                                         }else{    //Si está, checar que los tipos de parámetro coincidan.
+                                          $$=newTreeNode($1, NULL, 2, 0, 0, $3, NULL, NULL, NULL);//Si los tipos coinciden, se agrega 
                                           if(funcParamCheck(funTableRoot, funSearchTmp) == 0){
-                                            $$=newTreeNode($1, NULL, 2, 0, 0, $3, NULL, NULL, NULL);//Si los tipos coinciden, se agrega 
                                           }else{                                                      //al arbol un nodo de funcion apuntando a sus parametros
                                             error(8, $1);         //Si los tipos entre la llamada y la declaracion no coinciden, error.
                                           }
@@ -214,6 +214,7 @@ expresion : expr MENORQUE expr    {fun_Valid_Dos($1,$3);
 
 int yyerror(char const * s) {
   fprintf(stderr, "%s en linea %d\n", s, numlinea);
+  return 1;
 }
 
 void main(int argc, char * argv[]){

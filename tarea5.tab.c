@@ -1582,8 +1582,8 @@ yyreduce:
                                         if(funSearchTmp == NULL){   //Si no está, error.
                                           error(7, (yyvsp[-3].palabra));
                                         }else{    //Si está, checar que los tipos de parámetro coincidan.
+                                          (yyval.arbol)=newTreeNode((yyvsp[-3].palabra), NULL, 2, 0, 0, (yyvsp[-1].arbol), NULL, NULL, NULL);//Si los tipos coinciden, se agrega 
                                           if(funcParamCheck(funTableRoot, funSearchTmp) == 0){
-                                            (yyval.arbol)=newTreeNode((yyvsp[-3].palabra), NULL, 2, 0, 0, (yyvsp[-1].arbol), NULL, NULL, NULL);//Si los tipos coinciden, se agrega 
                                           }else{                                                      //al arbol un nodo de funcion apuntando a sus parametros
                                             error(8, (yyvsp[-3].palabra));         //Si los tipos entre la llamada y la declaracion no coinciden, error.
                                           }
@@ -1833,6 +1833,7 @@ yyreturn:
 
 int yyerror(char const * s) {
   fprintf(stderr, "%s en linea %d\n", s, numlinea);
+  return 1;
 }
 
 void main(int argc, char * argv[]){

@@ -1,13 +1,12 @@
-program test1{
-
-    var m1: int;
-    var m2: int;
-    var res: int
-    fun suma (var x1: int, var x2: int): int{
-        var res: int; 
-    }{
-
-        return x1 + x2;
+program test
+{
+    var m1 : int;
+    var m2 : int;
+    var res : int
+    fun suma (var x1: int, var x2: int): int
+    {}
+    {
+        return (x1 + x2);
     }
 }
 {

@@ -148,7 +148,7 @@ void error(int a, char*ref){
 	exit(1);
 }
 
-int fun_Valid_SET(char *ID,struct treeNode *expr, struct node *tableRoot){
+void fun_Valid_SET(char *ID,struct treeNode *expr, struct node *tableRoot){
 	struct node *copiaID;
 	copiaID=search(tableRoot,ID);
 	if(copiaID!=NULL){
