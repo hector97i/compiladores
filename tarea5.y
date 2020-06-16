@@ -116,6 +116,8 @@ assign_stmt : SET ID expr PUNTOCOMA {fun_Valid_SET($2,$3,tableRoot);
                                     }
             | PRINT expr PUNTOCOMA  {$$=newTreeNode($1, NULL, 0, 0, 0, $2, NULL, NULL, NULL);
                                     }
+            |RETURN expr PUNTOCOMA {$$=newTreeNode($1, NULL, 0, 0, 0, $2, NULL, NULL, NULL);
+                                   }                        
 ;
 
 if_stmt : IF OPENPAR expresion CLOSEPAR stmt {$$=newTreeNode($1, NULL, 0, 0, 0, $3, $5, NULL, NULL);//crear nodo if: type "if" branch1: expresion ($3) branch2: stmt ($5)
