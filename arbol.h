@@ -80,9 +80,19 @@ struct auxnode{
 
 void iatbAux(struct auxNode **pth, struct treeNode *actualNode){
 	struct auxNode *tmp;
-	tmp = (struct auxNode*
+	tmp = (struct auxNode*)malloc(sizeof(struct auxNode));
+	tmp ->name = actualNode;
+	tmp ->next = *pth;
+	*pth = tmp;
 		}
 
+void  datbAux(struct auxNode **pth){
+	struct auxNode *tmp;
+	tmp = *pth;
+	*pth = tmp -> next;
+	memset(tmp,0, sizeof(struct auxNode));
+	free(tmp);
+}
 
 void insTreeNode(struct treeNode * prev, char * typeN, int natV, int realV){
 
@@ -96,6 +106,9 @@ void insTreeNode(struct treeNode * prev, char * typeN, int natV, int realV){
 
 }
 */
+	
+struct node* search(struct node *head, char* ref);
+void runTree(struct treeNode *head, struct node *tableRoot);	
 
 struct treeNode* newTreeNode(char* typeV, char* charV, int tipoV, int natV, float realV, struct treeNode* b1, struct treeNode* b2, struct treeNode* b3, struct treeNode* b4){
 
