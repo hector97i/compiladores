@@ -154,6 +154,10 @@ void error(int a, char*ref){
 		case 5:
 		printf("%s declarada por segunda vez\n", ref);
 		break;
+		case 6:
+		printf("...., ref);
+		break;
+			
 	}
 	exit(1);
 }
@@ -497,4 +501,10 @@ void print(struct node *head){//Simple print method for the list
 			printf(" (float):=%f\n",head->valFloat);
 		head=head->next;
 	}
+	
+	
+	
+	
+	
+	
 }
