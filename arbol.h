@@ -19,6 +19,20 @@ struct treeNode{
 
 };
 
+struct funNode{
+	
+	struct funNode *next;
+	struct treeNode *decTree;
+	struct node *paramTree;
+	struct node *varTree;
+	char * id;
+	int tipo;
+	int natVal;
+	float realVal;
+	      };
+
+
+
 struct node{
 	int tipo;
 	char name[20];
@@ -57,12 +71,17 @@ void datbAux(struct auxNode **pth){//Delete at the beginning
 struct node* search(struct node *head, char* ref);
 void runTree(struct treeNode *head, struct node *tableRoot);
 
-/*
+
 struct auxnode{
-
-
+	struct treeNode *name;
+	struct auxNode *next;
 
 };
+
+void iatbAux(struct auxNode **pth, struct treeNode *actualNode){
+	struct auxNode *tmp;
+	tmp = (struct auxNode*
+		}
 
 
 void insTreeNode(struct treeNode * prev, char * typeN, int natV, int realV){
